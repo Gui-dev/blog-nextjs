@@ -16,12 +16,8 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     let total = 0
   
     if (pageViewBySlug) {
-      total = pageViewBySlug.total + 1
-      await db.collection('pageviews').updateOne({ slug }, { $set: { total } })
-    } else {
-      total = 1
-      await db.collection('pageviews').insertOne({ slug, total })
-    }
+      total = pageViewBySlug.total
+    } 
 
     return response.status(200).json({ total })
   }
